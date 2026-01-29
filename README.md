@@ -1,7 +1,7 @@
 # KR0003 Description
 
 ![Project Status](https://img.shields.io/badge/Status-Archived-red)
-![License](https://img.shields.io/github/license/adityakamath/kr0003_description?label=License)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 
 > **⚠️ This project is archived and no longer in active development.**
 
