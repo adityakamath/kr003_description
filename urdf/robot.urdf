@@ -68,7 +68,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://kr0003_description/meshes/rover.stl"/>
+        <mesh filename="../meshes/rover.stl"/>
       </geometry>
       <material name="blue"/>
     </visual>
@@ -96,7 +96,7 @@
     <visual>
       <origin rpy="1.5707963 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://kr0003_description/meshes/wheel_lf.stl"/>
+        <mesh filename="../meshes/wheel_lf.stl"/>
       </geometry>
       <material name="darkgreyrover"/>
     </visual>
@@ -116,7 +116,7 @@
     <visual>
       <origin rpy="1.5707963 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://kr0003_description/meshes/wheel_lb.stl"/>
+        <mesh filename="../meshes/wheel_lb.stl"/>
       </geometry>
       <material name="darkgreyrover"/>
     </visual>
@@ -136,7 +136,7 @@
     <visual>
       <origin rpy="-1.5707963 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://kr0003_description/meshes/wheel_rf.stl"/>
+        <mesh filename="../meshes/wheel_rf.stl"/>
       </geometry>
       <material name="darkgreyrover"/>
     </visual>
@@ -156,7 +156,7 @@
     <visual>
       <origin rpy="-1.5707963 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://kr0003_description/meshes/wheel_rb.stl"/>
+        <mesh filename="../meshes/wheel_rb.stl"/>
       </geometry>
       <material name="darkgreyrover"/>
     </visual>
