@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
-<xacro:include filename="$(find kr0003_description)/urdf/eobot.common.xacro"/>
+<xacro:include filename="$(find kr0003_description)/urdf/robot.common.xacro"/>
 <xacro:include filename="$(find kr0003_description)/urdf/robot.control.xacro"/>
 
 <xacro:property name="mesh_path" value="package://kr0003_description/meshes/"/>
