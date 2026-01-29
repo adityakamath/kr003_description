@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+<xacro:property name="pi_by_two" value="1.5707963" />
+
+<xacro:property name="base_mass" value="2.0" /> <!-- Guesstimate, needs to be measured -->
+<xacro:property name="base_length" value="0.4" />
+<xacro:property name="base_width" value="0.307" />
+<xacro:property name="base_height" value="0.102" />
+<xacro:property name="footprint_offset_z" value="-0.125" /> <!-- offset from base_link to base_footprint -->
+
+<xacro:property name="pi_base_mass" value="0.1" /> <!-- Guesstimate, needs to be measured -->
+<xacro:property name="pi_base_length" value="0.14" />
+<xacro:property name="pi_base_width" value="0.1499" />
+<xacro:property name="pi_base_height" value="0.08" />
+<xacro:property name="pi_base_offset_x" value="-0.111" />
+<xacro:property name="imu_offset_z" value="0.02" />
+
+<xacro:property name="laser_mass" value="0.19" />
+<xacro:property name="laser_radius" value="0.0378" />
+<xacro:property name="laser_height" value="0.0413" />
+<xacro:property name="laser_offset_z" value="0.08" />
+<xacro:property name="laser_optical_offset_z" value="0.0308" />
+
+<xacro:property name="wheel_radius" value="0.05" />
+<xacro:property name="wheel_mass" value="0.075" /> <!-- Guesstimate, needs to be measured -->
+<xacro:property name="wheel_thickness" value="0.05"/>
+
+<!-- offsets from base_link to joint_** -->
+<xacro:property name="joint_offset_x" value="0.15" /> <!-- base_length/2 - wheel_radius -->
+<xacro:property name="joint_offset_y" value="0.1035" /> <!-- base_width/2 - wheel_thickness -->
+<xacro:property name="joint_offset_z" value="-0.073" /> <!-- 0 - wheel_radius - distance_to_ground-->
+
+<xacro:macro name="cylinder_inertia" params="m r h">
+  <inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
+            iyy="${m*(3*r*r+h*h)/12}" iyz = "0"
+            izz="${m*r*r/2}" />
+</xacro:macro>
+
+<xacro:macro name="box_inertia" params="m x y z">
+  <inertia  ixx="${m*(y*y+z*z)/12}" ixy = "0" ixz = "0"
+            iyy="${m*(x*x+z*z)/12}" iyz = "0"
+            izz="${m*(x*x+z*z)/12}" />
+</xacro:macro>
+
+<xacro:macro name="sphere_inertia" params="m r">
+  <inertia  ixx="${2*m*r*r/5}" ixy = "0" ixz = "0"
+            iyy="${2*m*r*r/5}" iyz = "0"
+            izz="${2*m*r*r/5}" />
+</xacro:macro>
+
+<!-- Color codes from https://gist.github.com/naoki-mizuno/5e63a13597d5c5fe817c1600b829595e, matches with Gazebo colors with the same name -->
+
+<material name="blue">
+    <color rgba="0.011764705882352941 0.2627450980392157 0.8745098039215686 1.0"/>
+</material>
+
+<material name="orangerover">
+    <color rgba="0.9764705882352941 0.45098039215686275 0.023529411764705882 1.0"/>
+</material>
+
+<material name="darkgreyrover">
+    <color rgba="0.21176470588235294 0.21568627450980393 0.21568627450980393 1.0"/> 
+</material>
+
+</robot>

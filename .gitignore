@@ -1,0 +1,40 @@
+# ROS 2 build and install artifacts
+build/
+install/
+log/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# CMake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Colcon files
+colcon*
+
+# Egg info
+*.egg-info/
+
+# Misc
+*.swp
+*.bak
+*.tmp
+*.orig
+*.rej
+
+# VSCode
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Other
+*.user
+*.sublime-workspace
+*.sublime-project

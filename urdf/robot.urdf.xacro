@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+<xacro:include filename="$(find kr0003_description)/urdf/eobot.common.xacro"/>
+<xacro:include filename="$(find kr0003_description)/urdf/robot.control.xacro"/>
+
+<xacro:property name="mesh_path" value="package://kr0003_description/meshes/"/>
+
+<!-- **** LINKS **** -->
+
+<!-- BASE_FOOTPRINT -->
+<link name="base_footprint"/>
+
+<!-- BASE_LINK -->
+<link name="base_link">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <mesh filename="${mesh_path}rover.stl" />
+    </geometry>
+    <material name="blue"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 ${-base_height/2}" rpy="0 0 0" />
+    <geometry>
+      <box size="${base_length} ${base_width} ${base_height}"/>
+    </geometry>
+  </collision>
+</link>
+
+<!-- BASE_LINK_INERTIAL (WORKAROUND FOR KDL WHICH DOES NOT ACCEPT BASE_LINK WITH INERTIA) -->
+<link name="base_link_inertial">
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <mass value="${base_mass}"/>
+    <xacro:box_inertia m="${base_mass}" x="${base_length}" y="${base_width}" z="${base_height}"/>
+  </inertial>
+</link>
+
+<!-- WHEEL LEFT FRONT -->
+<link name="wheel_lf">
+  <inertial>
+    <mass value="${wheel_mass}"/>
+    <xacro:cylinder_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_thickness}"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="${pi_by_two} 0 0" />
+    <geometry>
+      <mesh filename="${mesh_path}wheel_lf.stl" />
+    </geometry>
+    <material name="darkgreyrover"/>
+  </visual>
+  <collision>
+    <origin xyz="0 ${wheel_thickness/2} 0" rpy="${pi_by_two} 0 0" />
+    <geometry>
+      <cylinder length="${wheel_thickness}" radius="${wheel_radius}"/>
+    </geometry>
+  </collision>
+</link>
+
+<!-- WHEEL LEFT BACK -->
+<link name="wheel_lb">
+  <inertial>
+    <mass value="${wheel_mass}"/>
+    <xacro:cylinder_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_thickness}"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="${pi_by_two} 0 0" />
+    <geometry>
+      <mesh filename="${mesh_path}wheel_lb.stl" />
+    </geometry>
+    <material name="darkgreyrover"/>
+  </visual>
+  <collision>
+    <origin xyz="0 ${wheel_thickness/2} 0" rpy="${pi_by_two} 0 0" />
+    <geometry>
+      <cylinder length="${wheel_thickness}" radius="${wheel_radius}"/>
+    </geometry>
+  </collision>
+</link>
+
+<!-- WHEEL RIGHT FRONT -->
+<link name="wheel_rf">
+  <inertial>
+    <mass value="${wheel_mass}"/>
+    <xacro:cylinder_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_thickness}"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="-${pi_by_two} 0 0" />
+    <geometry>
+      <mesh filename="${mesh_path}wheel_rf.stl" />
+    </geometry>
+    <material name="darkgreyrover"/>
+  </visual>
+  <collision>
+    <origin xyz="0 ${-1*(wheel_thickness/2)} 0" rpy="-${pi_by_two} 0 0" />
+    <geometry>
+      <cylinder length="${wheel_thickness}" radius="${wheel_radius}"/>
+    </geometry>
+  </collision>
+</link>
+
+<!-- WHEEL RIGHT BACK -->
+<link name="wheel_rb">
+  <inertial>
+    <mass value="${wheel_mass}"/>
+    <xacro:cylinder_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_thickness}"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="-${pi_by_two} 0 0" />
+    <geometry>
+      <mesh filename="${mesh_path}wheel_rb.stl" />
+    </geometry>
+    <material name="darkgreyrover"/>
+  </visual>
+  <collision>
+    <origin xyz="0 ${-1*(wheel_thickness/2)} 0" rpy="-${pi_by_two} 0 0" />
+    <geometry>
+      <cylinder length="${wheel_thickness}" radius="${wheel_radius}"/>
+    </geometry>
+  </collision>
+</link>
+
+<!-- **** JOINTS **** -->
+
+<!-- BASE_LINK TO BASE_FOOTPRINT -->
+<joint name="base_footprint_fixed" type="fixed">
+  <parent link="base_footprint"/>
+  <child link="base_link"/>
+  <origin xyz="0 0 ${-footprint_offset_z}"/>
+</joint>
+
+<!-- BASE_LINK_INERTIAL TO BASE_LINK -->
+<joint name="base_inertial_fixed" type="fixed">
+  <parent link="base_link"/>
+  <child link="base_link_inertial"/>
+  <origin xyz="0 0 0"/>
+</joint>
+
+<!-- WHEEL_LF TO BASE_LINK -->
+<joint name="joint_lf" type="continuous">
+  <parent link="base_link" />
+  <child link="wheel_lf" />
+  <origin xyz="${joint_offset_x} ${joint_offset_y} ${joint_offset_z}" rpy="0 0 0" />
+  <axis xyz="0 1 0" />
+</joint>
+
+<!-- WHEEL_LB TO BASE_LINK -->
+<joint name="joint_lb" type="continuous">
+  <parent link="base_link" />
+  <child link="wheel_lb" />
+  <origin xyz="-${joint_offset_x} ${joint_offset_y} ${joint_offset_z}" rpy="0 0 0" />
+  <axis xyz="0 1 0" />
+</joint>
+
+<!-- WHEEL_RF TO BASE_LINK -->
+<joint name="joint_rf" type="continuous">
+  <parent link="base_link" />
+  <child link="wheel_rf" />
+  <origin xyz="${joint_offset_x} -${joint_offset_y} ${joint_offset_z}" rpy="0 0 0" />
+  <axis xyz="0 1 0" />
+</joint>
+
+<!-- WHEEL_RB TO BASE_LINK -->
+<joint name="joint_rb" type="continuous">
+  <parent link="base_link" />
+  <child link="wheel_rb" />
+  <origin xyz="-${joint_offset_x} -${joint_offset_y} ${joint_offset_z}" rpy="0 0 0" />
+  <axis xyz="0 1 0" />
+</joint>
+
+</robot>
