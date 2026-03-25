@@ -7,14 +7,11 @@
   <!-- offset from base_link to base_footprint -->
   <!-- 0 - wheel_radius - distance_to_ground-->
   <!-- Color codes from https://gist.github.com/naoki-mizuno/5e63a13597d5c5fe817c1600b829595e, matches with Gazebo colors with the same name -->
-  <material name="blue">
-    <color rgba="0.011764705882352941 0.2627450980392157 0.8745098039215686 1.0"/>
-  </material>
-  <material name="orangerover">
-    <color rgba="0.9764705882352941 0.45098039215686275 0.023529411764705882 1.0"/>
+  <material name="lightgrey">
+    <color rgba="0.8 0.8 0.8 1.0"/>
   </material>
   <material name="darkgreyrover">
-    <color rgba="0.21176470588235294 0.21568627450980393 0.21568627450980393 1.0"/>
+    <color rgba="0.15 0.15 0.15 1.0"/>
   </material>
   <!-- WHEEL_LF TRANSMISSION -->
   <transmission name="trans_lf">
@@ -70,7 +67,7 @@
       <geometry>
         <mesh filename="../meshes/rover.stl"/>
       </geometry>
-      <material name="blue"/>
+      <material name="lightgrey"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 -0.051"/>
